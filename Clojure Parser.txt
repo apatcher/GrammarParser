@@ -1,0 +1,16 @@
+(ns tokenizer.core)
+;Adam Nur
+;CS 441
+;Final Programming Project
+(def c (clojure.string/split-lines (clojure.string/trim(slurp "input.txt"))));Get text file as a string 
+(defn id[c](clojure.string/replace c #"[a-zA-Z]" "ID")); Function to replace letters with the ID label
+(defn INT[c](clojure.string/replace c #"\d" "INT")); Function to replace digits with the INT label
+(defn plus[c](clojure.string/replace c "+" "PLUS"));Function to replace + operator with PLUS
+(defn sub [c](clojure.string/replace c "-" "SUB"));Replaces subtraction operator with SUB
+(defn mult [c](clojure.string/replace c "*" "MULT"));MULT label replaces *
+(defn div [c](clojure.string/replace c "/" "DIV")); DIV label replaces /
+(defn lpar [c](clojure.string/replace c "(" "LPAR"));LPAR replaces (
+(defn rpar [c](clojure.string/replace c ")" "RPAR"));RPAR replaces )
+(def x (rpar(INT(plus(sub(mult(div(lpar(id c)))))))));Perform the substitutions and save in x
+(println x);Prints out the lexeme vector
+(println c);Prints out the token vector
